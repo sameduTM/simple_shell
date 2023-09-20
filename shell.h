@@ -10,12 +10,15 @@ extern char **environ;
 #include <sys/types.h>
 #include <sys/wait.h>
 
+/* prototypes to be used */
 void print_prompt(void);
-void free_argv(char **argv);
-int execute_command(const char *cmd_path, char **argv);
-void tokenize_string(char *str, char **tokens, int *token_count);
+char *read_command(void);
+void free_argv(char **argv, int argc);
+void execute_command(char **argv);
+char **tokenize_command(char *command, int *argc);
 void handle_user_input(void);
 void handle_path(char *);
 void _snprintf(char *token, char **argv, char *path_copy);
 
 #endif
+
