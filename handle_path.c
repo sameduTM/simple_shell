@@ -57,8 +57,8 @@ void handle_path(char *buffer)
  * @argv: pointer to array of strings wrtten to
  * @path_copy: pointer to path
  *
- * Return: Nothind
-*/
+ * Return: Nothing
+ */
 void _snprintf(char *token, char **argv, char *path_copy)
 {
 	size_t cmd_path_len;
@@ -77,12 +77,11 @@ void _snprintf(char *token, char **argv, char *path_copy)
 		strcpy(cmd_path, token);
 		strcat(cmd_path, "/");
 		strcat(cmd_path, argv[0]);
-
+		/* to check if the command specified by cmd_path is executable. */
 		if (access(cmd_path, X_OK) == 0)
 		{
 			execute_command(cmd_path, argv);
 			found = 1;
-			exit(EXIT_FAILURE);
 		}
 		token = strtok(NULL, ":");
 	}
