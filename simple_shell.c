@@ -1,93 +1,52 @@
 #include "shell.h"
-
 /**
- * s_handler - checks for Ctrl C input
- * @s_num: int
- *
- * Return: Nothing
- */
-void s_handler(int s_num)
+* main - main function of the simple shell program
+* @ac: count of arguments
+* @av: pointer to arguments
+* @envp: pointer to environment array
+*
+* Return: 0 Always
+*/
+int main(__attribute__((unused)) int ac, __attribute__((unused))
+
+char **av, char **envp)
 {
-	if (s_num == SIGINT)
+	char *prompt = "#cisfun$ ";
+
+	char *buffer = NULL, **str = NULL;
+
+	int i = 0, stat = 0, argc = 0;
+
+	static int _exitval, counter;
+
+	size_t bufsize = 0;
+	ssize_t bytes = 0;
+
+	while (1)
 	{
-		_puts("\n#cisfun$ ");
+		if (isatty(STDIN_FILENO) == 1)
+			write(STDOUT_FILENO, prompt, strlen(prompt));
+
+		bytes = getline(&buffer, &bufsize, stdin);
+		++counter;
+		if (_uniqchar(buffer, bytes, &_exitval) == 127)
+			continue;
+
+		_rmnl(buffer);
+
+		str = _parse_r(buffer);
+
+		for (i = 0; str[i]; i++)
+			argc++;
+		_stdlib(buffer, str, envp, &_exitval);
+
+		stat = _pth(str[0], str, envp, &_exitval);
+
+		_execve(stat, str, &_exitval, &counter);
+
+		fflush(stdin);
 	}
-}
-
-/**
- * _eof - checks end-of-file
- * @len: return value of _puts function
- *
- * @buffer: buffer
- */
-void _eof(int len, char *buffer)
-{
-	(void)buffer;
-	if (len == -1)
-	{
-		if (isatty(STDIN_FILENO))
-		{
-			_puts("\n");
-			free(buffer);
-		}
-		exit(0);
-	}
-}
-/**
- * _isatty - check if input is from terminal
- */
-
-void _isatty(void)
-{
-	if (isatty(STDIN_FILENO))
-		_puts("#cisfun$ ");
-}
-/**
- * main - our main function
- *
- * Return: 0 on success
- */
-
-int main(void)
-{
-	ssize_t len = 0;
-	char *buff = NULL, *value, *pathname, **arv;
-	size_t size = 0;
-	path_list *head = '\0';
-	void (*f)(char **);
-
-	signal(SIGINT, s_handler);
-	while (len != EOF)
-	{
-		_isatty();
-		len = getline(&buff, &size, stdin);
-		_eof(len, buff);
-		arv = _tokenizer(buff, " \n");
-		if (!arv || !arv[0])
-			exec_cmd(arv);
-		else
-		{
-			value = get_env("PATH");
-			head = link_path(value);
-			pathname = find_executable(arv[0], head);
-			f = check_builtin(arv);
-			if (f)
-			{
-				free(buff);
-				f(arv);
-			}
-			else if (!pathname)
-				exec_cmd(arv);
-			else if (pathname)
-			{
-				free(arv[0]);
-				arv[0] = pathname;
-				exec_cmd(arv);
-			}
-		}
-	}
-	free_path_list(head);
-	free_argv(arv);
-	free(buff);
+	free(buffer);
 	return (0);
+
 }

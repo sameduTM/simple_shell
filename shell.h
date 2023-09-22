@@ -1,70 +1,49 @@
-#ifndef SHELL_SMPLE
-#define SHELL_SMPLE
+#ifndef UNIX_SH
+#define UNIX_SH
+
+#define TRUE 1
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <string.h>
-#include <sys/wait.h>
 #include <sys/types.h>
-#include <errno.h>
-#include <stddef.h>
+#include <sys/wait.h>
+#include <string.h>
 #include <sys/stat.h>
-#include <signal.h>
 
 
-int _putchar(char c);
-void _puts(char *s);
-int _strlen(char *s);
-char *_mystrdup(char *s);
-char *concat_str(char *nm, char *ep, char *val);
+int _pth(char *, char **, char **, int *);
 
-char **_tokenizer(char *_str, const char *del);
-void exec_cmd(char **argv);
-void *reall_mem(void *ptr, unsigned
-int old_sz, unsigned int new_sz);
 
-extern char **environ;
 
-/**
-* struct path_list - Linked list for PATH directories
-* @dir: directory
-* @p: next node pointer
-*/
-typedef struct path_list
-{
-	char *dir;
+int _showenv(char **, int *ex_st);
+char *_dupenv(char **);
 
-	struct path_list *p;
-} path_list;
 
-char *get_env(const char *name);
 
-path_list *add_path_node_end(path_list **head, char *str);
+void _stdlib(char *, char **, char **, int *);
+void _execve(int, char **, int *, int *);
 
-path_list *link_path(char *path);
 
-char *find_executable(char *filename, path_list *head);
 
-/**
-* struct builtin - pointer to function with with built-in command
-* @name: built-in command name
-* @func: executes the built-in cmd
-*/
-typedef struct builtin
-{
-	char *name;
+int _strlen(char *);
+char *_strdup(char *);
+int _strcmp(char *, char *);
+char *_strcpy(char *, char *);
+char *_strcat(char *, char *);
 
-	void (*func)(char **);
-} builtin;
 
-void (*check_builtin(char **argv))(char **av);
-int atoi_modf(char *s);
-void exit_sh(char **argv);
-void env(char **argv);
-void set_env(char **argv);
-void unset_env(char **argv);
-void free_argv(char **argv);
-void free_path_list(path_list *head);
+
+int _putchar(char);
+void _printf(char *);
+char *_strpth(char *, char *);
+char **_parse_r(char *);
+void _numprint(int *);
+
+
+
+void _rmnl(char *);
+void _freeargv(char **, int);
+int _uniqchar(char *, ssize_t, int *);
 
 #endif
