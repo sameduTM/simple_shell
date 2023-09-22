@@ -38,6 +38,7 @@ char **av, char **envp)
 
 		for (i = 0; str[i]; i++)
 			argc++;
+
 		_stdlib(buffer, str, envp, &_exitval);
 
 		stat = _pth(str[0], str, envp, &_exitval);

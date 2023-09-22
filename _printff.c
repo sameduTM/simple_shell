@@ -11,6 +11,7 @@ void _printf(char *str)
 
 	for (i = 0; str[i] != '\0'; i++)
 		;
+
 	sz = i;
 
 	pt = write(STDOUT_FILENO, str, sz);
