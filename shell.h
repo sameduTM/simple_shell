@@ -3,6 +3,8 @@
 
 #define TRUE 1
 
+extern char **environ;
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

@@ -15,7 +15,7 @@ void _execve(int pathstat, char **argv, int *_exit, int *cmd_count)
 		if (access(argv[0], X_OK) == 0)
 		{
 			if (fork() == 0)
-				execve(argv[0], argv, NULL);
+				execve(argv[0], argv, environ);
 			else
 				wait(NULL);
 			*_exit = 2;
