@@ -18,7 +18,7 @@ void _execve(int pathstat, char **argv, int *_exit, int *cmd_count)
 				execve(argv[0], argv, environ);
 			else
 				wait(NULL);
-			*_exit = 2;
+			*_exit = 0;
 		}
 		else if (access(argv[0], F_OK) != 0)
 		{
