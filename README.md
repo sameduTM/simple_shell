@@ -1,5 +1,3 @@
-Writing a good README for your Simple Shell project is essential for helping others understand your project and how to use it. Here's a template you can use for your Simple Shell README:
-
 # Simple Shell
 
 **Simple Shell** is a minimalistic shell implementation written in C. It provides basic shell functionalities and can execute commands entered by the user.

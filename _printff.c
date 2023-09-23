@@ -11,7 +11,6 @@ void _printf(char *str)
 
 	for (i = 0; str[i] != '\0'; i++)
 		;
-
 	sz = i;
 
 	pt = write(STDOUT_FILENO, str, sz);
@@ -70,7 +69,7 @@ void _numprint(int *counter)
 
 	i += len;
 
-	for (k = 0; k < len; k++)
+	for (k = 0; k < len - 1; k++)
 		trm = trm * 10;
 	_putchar('0' + (tot / trm));
 

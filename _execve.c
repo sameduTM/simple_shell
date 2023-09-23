@@ -18,11 +18,11 @@ void _execve(int pathstat, char **argv, int *_exit, int *cmd_count)
 				execve(argv[0], argv, NULL);
 			else
 				wait(NULL);
-			*_exit = 0;
+			*_exit = 2;
 		}
 		else if (access(argv[0], F_OK) != 0)
 		{
-			_printf("sh: ");
+			_printf("hsh: ");
 			_numprint(cmd_count);
 			_printf(": ");
 			perror(argv[0]);
@@ -30,7 +30,7 @@ void _execve(int pathstat, char **argv, int *_exit, int *cmd_count)
 		}
 		else if (access(argv[0], F_OK) == 0 && access(argv[0], X_OK) != 0)
 		{
-			_printf("sh: ");
+			_printf("hsh: ");
 			_numprint(cmd_count);
 			_printf(": ");
 			perror(argv[0]);

@@ -89,7 +89,7 @@ int _strcmp(char *str1, char *str2)
 	while (*str1)
 	{
 		if (*str1 != *str2)
-			exit(EXIT_FAILURE);
+			break;
 		str1++;
 		str2++;
 	}
