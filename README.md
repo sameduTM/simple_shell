@@ -89,4 +89,4 @@ HOME=/home/user
 
 ## License
 
-Feel free to customize this template to include any additional information specific to your project. A well-written README helps users and potential contributors understand your project and how to use it effectively.
+Feel free to customize this template to include any additional information specific to your project.
